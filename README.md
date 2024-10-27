@@ -1,0 +1,1 @@
+# Lista dwukierunkowa działająca na stercie w języku C++
