@@ -16,4 +16,9 @@ private: //w private będą przechowywane head (poczatek listy) i back (koniec l
     Node* head; //head - poczatek listy
     Node* back; //back - koniec listy
 
+public:
+    DubleLinkedList() : head(nullptr), back(nullptr) { //ustawiamy wskaźniki head i back na nullptr, ponieważ lista jest początkowo pusta
+        srand(static_cast<unsigned>(time(nullptr))); //ustawiamy tak aby za każdym uruchomieniem programu liczby były inne
+                                                     //time(nullptr) zwraca aktualny czas co oznacza że liczby są unikalne
+    }
 
