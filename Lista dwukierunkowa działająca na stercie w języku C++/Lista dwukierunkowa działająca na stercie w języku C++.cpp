@@ -184,7 +184,11 @@ int main() {
 
     list.clear();                                                                                                   //czyszczenie listy
     cout << "Lista po wyczyszczeniu: ";
-    list.display();                                                                                                 //wyświetlamy listę po usunięciu
+    list.display();     
+                                                                                            //wyświetlamy listę po usunięciu
 
+    cout << "Hello world" << endl;
+
+    
     return 0;
 }
