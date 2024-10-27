@@ -141,6 +141,25 @@ public:
         }
         cout << endl;
     }
+
+    void displayReverse() {        //wyświetlamy listę w odwrotnej kolejności
+        Node* current = back;
+        while (current) {
+            cout << current->data << " ";   //przechodzimy przez całą liste od back do head wyświetlając znaczenia dla każdego elementu
+            current = current->prev;
+        }
+        cout << endl;
+    }
+
+    void clear() {              //czyszczymy całą listę
+        while (head) {
+            removeFromHead();   //używając removeFromHead() w pętli usuwamy każdy element zaczynając od początkowego
+        }
+    }
+
+    ~DubleLinkedList() {        //destruktor automatucznie wywołuje i usuwa listę
+        clear();
+    }
 };
 
 int main() {
@@ -154,12 +173,19 @@ int main() {
     cout << "Lista z losowymi wartościami: ";
     list.display(); //wyświetlamy wszystkie elementy za pomocą display()
 
+    cout << "Lista w odwrotnej kolejności: ";
+    list.displayReverse(); //wyświetlamy listę w odwrotnej kolejności elementów
+
     list.removeFromHead(); //usuwamy początkowy element listy
     list.removeFromBack(); //usuwamy końcowy element listy
     list.removeAt(0);      //usuwamy element pod wskazanym indeksem (usuwany jest drugi element listy jednak już jest usunięty pierszy element 
 
     cout << "Lista po usunięciu elementów: ";
     list.display();        //będzie wypisany jeden element listy (trzeci element) po wykonaniu dizłań z usunięciem
+
+    list.clear();           //czyszczenie listy
+    cout << "Lista po wyczyszczeniu: ";
+    list.display();         //wyświetlamy listę po usunięciu
 
     return 0;
 }
