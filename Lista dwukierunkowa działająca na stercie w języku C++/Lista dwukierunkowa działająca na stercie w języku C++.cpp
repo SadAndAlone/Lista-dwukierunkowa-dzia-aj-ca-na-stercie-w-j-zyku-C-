@@ -22,3 +22,16 @@ public:
                                                      //time(nullptr) zwraca aktualny czas co oznacza że liczby są unikalne
     }
 
+    void addRandomToHead() { //dodaje losowy element na początek listy
+        int value = rand() % 100;  //losowanie w zakresie 0-99
+        Node* newNode = new Node(value); //tworzy nowy element o wygenerowanej wartosci
+        if (!head) {
+            head = back = newNode; //jesli lista jest pusta (head == nullptr) ustawia zarówno head jak i tail na newNode
+        }
+        else {
+            newNode->next = head; //w innym przypadku nowy element bedzie nową głową (head) a wskaźnik prev starej głowy wskazuje na newNode
+            head->prev = newNode; //a wskaźnik next elementu newNode wskazuje na poprzednią głowę
+            head = newNode; //a wskaźnik prev starej głowy wskazuje na newNode
+        }
+    }
+
