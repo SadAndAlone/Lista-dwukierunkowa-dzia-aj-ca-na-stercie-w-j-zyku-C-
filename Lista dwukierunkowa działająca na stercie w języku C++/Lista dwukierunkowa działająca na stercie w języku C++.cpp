@@ -19,7 +19,7 @@ private: //w private będą przechowywane head (poczatek listy) i back (koniec l
 public:
     DubleLinkedList() : head(nullptr), back(nullptr) { //ustawiamy wskaźniki head i back na nullptr, ponieważ lista jest początkowo pusta
         srand(static_cast<unsigned>(time(nullptr))); //ustawiamy tak aby za każdym uruchomieniem programu liczby były inne
-                                                     //time(nullptr) zwraca aktualny czas co oznacza że liczby są unikalne
+        //time(nullptr) zwraca aktualny czas co oznacza że liczby są unikalne
     }
 
     void addRandomToHead() { //dodaje losowy element na początek listy
@@ -67,12 +67,12 @@ public:
             return;
         }
 
-        Node* newNode = new Node(value); 
-        newNode->next = current->next; 
+        Node* newNode = new Node(value);
+        newNode->next = current->next;
         newNode->prev = current;
-                                            //jesli element jest dodawany na koncu listy ustawia nowy ostatni element back
+        //jesli element jest dodawany na koncu listy ustawia nowy ostatni element back
         if (current->next) {
-            current->next->prev = newNode;  
+            current->next->prev = newNode;
         }
         else {                              //w przeciwnym razie wstawia element pomiędzy current a current->next
             back = newNode;
@@ -80,3 +80,27 @@ public:
 
         current->next = newNode;
     }
+
+    void display() {  //wyswietlić całą liste
+        Node* current = head;      //przechodzimy przez liste od head do back pokazując data dla każdego elementu
+        while (current) {
+            cout << current->data << " ";
+            current = current->next;
+        }
+        cout << endl;
+    }
+};
+
+int main() {
+    DubleLinkedList list; //tworzymy nowa liste dwukierunkowa o nazwie list
+
+    list.addRandomToHead(); //dodajemy losowy element na poczatek listy 
+    list.addRandomToHead(); //wykonujemy dwa razy, co oznacza, że na początku listy znajdą się dwa losowe elemennty
+    list.addRandomToBack(); //dodajemy losowy element na koniec listy
+    list.insertRandomAt(1); //umieszczamy nowy element pomiędzy początkiem listy i drugim elementem
+
+    cout << "Lista z losowymi wartościami: ";
+    list.display(); //wyświetlamy wszystkie elementy za pomocą display()
+
+    return 0;
+}
