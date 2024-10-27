@@ -188,6 +188,9 @@ int main() {
                                                                                             //wyświetlamy listę po usunięciu
 
     cout << "Hello world" << endl;
+    for (int i = 0; i < 5; i++) {
+        cout << "Hello world" << endl;
+    }
 
     
     return 0;
