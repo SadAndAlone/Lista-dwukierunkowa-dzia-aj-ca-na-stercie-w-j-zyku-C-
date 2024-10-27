@@ -70,7 +70,7 @@ public:
         Node* newNode = new Node(value);
         newNode->next = current->next;
         newNode->prev = current;
-        //jesli element jest dodawany na koncu listy ustawia nowy ostatni element back
+                                            //jesli element jest dodawany na koncu listy ustawia nowy ostatni element back
         if (current->next) {
             current->next->prev = newNode;
         }
@@ -81,11 +81,63 @@ public:
         current->next = newNode;
     }
 
-    void display() {  //wyswietlić całą liste
+    void removeFromHead() { //usuwamy element z początlku listy
+        if (!head) return; //sprawdzamy czy lista nie jest pusta
+        Node* temp = head;
+        head = head->next; //ustawia head na następny element a jeśli lista ma więcej niż jeden element ustawia prev nowego pierwszego elementu na nullptr
+        if (head) {
+            head->prev = nullptr;
+        }
+        else {
+            back = nullptr; //jeśli usuniety element był jedynym na liscie back również będzie na nullptr
+        }
+        delete temp;
+    }
+
+    void removeFromBack() { //usuwamy element z końca listy
+        if (!back) return; //działa podobnie do removeFromHead ale usuwa elementy z końca listy
+        Node* temp = back;
+        back = back->prev;
+        if (back) {
+            back->next = nullptr;
+        }                  //jeśli back zostaje usunięte, back będzie na nullptr co oznacza że lista jest pusta
+        else {
+            head = nullptr;
+        }
+        delete temp;
+    }
+
+    void removeAt(int index) { //usuwamy element z podanego indeksu
+        if (index == 0) {
+            removeFromHead();
+            return;
+        }
+                                //znajduje element na podanym indeksie
+        Node* current = head;
+        int pos = 0;
+        while (current && pos < index) {
+            current = current->next;
+            pos++;
+        }
+
+        if (!current) {
+            cout << "Indeks poza zakresem " << endl; //jesli index jest poza zakresem listy wypisuje błąd
+            return;
+        }
+
+        if (current->prev) current->prev->next = current->next; //dostosujemy wskaźniki prev i next sąsiadujących elementow
+        if (current->next) current->next->prev = current->prev;
+
+        if (current == back) back = current->prev;              //jeśli usuwany element to back, aktualizujemy wskaźnik back
+
+        delete current;
+    }
+
+    void display() {               //wyswietlić całą liste
         Node* current = head;      //przechodzimy przez liste od head do back pokazując data dla każdego elementu
         while (current) {
             cout << current->data << " ";
-            current = current->next;
+            current = current->next;  
         }
         cout << endl;
     }
@@ -101,6 +153,13 @@ int main() {
 
     cout << "Lista z losowymi wartościami: ";
     list.display(); //wyświetlamy wszystkie elementy za pomocą display()
+
+    list.removeFromHead(); //usuwamy początkowy element listy
+    list.removeFromBack(); //usuwamy końcowy element listy
+    list.removeAt(0);      //usuwamy element pod wskazanym indeksem (usuwany jest drugi element listy jednak już jest usunięty pierszy element 
+
+    cout << "Lista po usunięciu elementów: ";
+    list.display();        //będzie wypisany jeden element listy (trzeci element) po wykonaniu dizłań z usunięciem
 
     return 0;
 }
