@@ -152,10 +152,14 @@ public:
 
     void hello() {
         cout << "Hello world";
+
+        int d = 20;
+        int e = 40;
+        int a = 20;
+        cout << a + d - e;
         int a = 10;
         int b = 20;
         cout << a + b;
-
     }
 
     void clear() {                                                                                                  //czyszczymy całą listę
