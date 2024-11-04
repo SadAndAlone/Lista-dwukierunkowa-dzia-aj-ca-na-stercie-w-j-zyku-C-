@@ -150,6 +150,11 @@ public:
         cout << endl;
     }
 
+    void hello() {
+        cout << "Hello world";
+
+    }
+
     void clear() {                                                                                                  //czyszczymy całą listę
         while (head) {
             removeFromHead();                                                                                       //używając removeFromHead() w pętli usuwamy każdy element zaczynając od początkowego
@@ -185,6 +190,6 @@ int main() {
     list.clear();                                                                                                   //czyszczenie listy
     cout << "Lista po wyczyszczeniu: ";
     list.display();                                                                                                 //wyświetlamy listę po usunięciu
-
+    list.hello();
     return 0;
 }
